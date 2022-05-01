@@ -77,22 +77,25 @@ namespace MuSeoun_Engine
 		}
 		void Update()
 		{
+			if (o.x != p.x) {
+				--o.x;
+			}
 			
 		}
 		void Render()
 		{
-			
+
 			cRenderer.Clear();
-			
+
 
 			cRenderer.MoveCursor(p.x, p.y);
 			cRenderer.DrawString("P");
 
 			cRenderer2.MoveCursor(o.x, o.y);
-			cRenderer2.DrawString("O");
-			
-			
-			
+			cRenderer2.DrawString("M");
+
+
+
 
 			cRenderer.MoveCursor(10, 20);
 			renderDuration = chrono::system_clock::now() - startRenderTimePoint;
@@ -101,20 +104,33 @@ namespace MuSeoun_Engine
 			string fps = "FPS : " + to_string(1.0 / renderDuration.count());
 			cRenderer.DrawString(fps);
 
-			string as = "¾ÈºÎµúÈû ";
+			string as;
 
-			for (int i = 0; i < 10; i++) {
-				--o.x;
-			}
+
 
 			cRenderer3.MoveCursor(20, 25);
-			if (o.x <= 20) {
-				as = "ºÎµúÈû ";
+
+
+
+			if (o.x >= 21) {
+				as = "´Ù°¡¿À´Â ÁßÀÔ´Ï´Ù. ";
 			}
-			else {}		
+			else if (o.x <= 20) {
+				if (p.y == o.y) {
+					as = "Á×¾ú½À´Ï´Ù ";
+					o.x = 50;
+					this_thread::sleep_for(chrono::milliseconds(400));
+				}
+				else if(p.y != o.y){
+					as = "ÇÇÇß½À´Ï´Ù. ";
+					o.x = 50;
+					this_thread::sleep_for(chrono::milliseconds(400));
+				}
+			}
+				
 			cRenderer3.DrawString(as);
 			
-
+			
 			
 
 			

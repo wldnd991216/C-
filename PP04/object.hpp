@@ -5,7 +5,7 @@ public:
 	int i;
 	Object()
 	{
-		x = 60;
+		x = 50;
 		y = 7;
 	}
 	~Object()
